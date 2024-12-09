@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Regras básicas de segurança
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Regras para tickets
+    match /tickets/{ticketId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && 
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.type == 'admin' ||
+         resource.data.userId == request.auth.uid);
+    }
+    
+    // Regras para mensagens de chat
+    match /chats/{chatId}/messages/{messageId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && 
+        (resource.data.userId == request.auth.uid ||
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.type == 'admin');
+    }
+  }
+}

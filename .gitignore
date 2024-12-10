@@ -33,4 +33,7 @@ dist-ssr
 # Firebase
 scripts/serviceAccount.json
 
+# Project specific
+.bolt/
+
 .vercel

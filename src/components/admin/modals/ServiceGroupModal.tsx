@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
+import { FirebaseService } from "../../../services/firebaseService";
 import { ServiceGroup } from '../../../types/service';
-import { SupabaseService } from "../../../services/supabaseService";
 
 interface ServiceGroupModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (group: Omit<ServiceGroup, 'id'>) => void;
-  group: ServiceGroup | null;
+  onSave: () => void;
+  group?: ServiceGroup;
 }
 
 export function ServiceGroupModal({
@@ -41,7 +41,7 @@ export function ServiceGroupModal({
       description: description || undefined,
     };
 
-    SupabaseService.saveServiceGroup(groupData).then(onSave);
+    FirebaseService.getInstance().createGroup(groupData).then(onSave);
   };
 
   const handleClose = () => {

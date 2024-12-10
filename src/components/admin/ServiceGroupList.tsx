@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash } from 'lucide-react';
-import { SupabaseService } from '../../services/supabaseService';
+import { FirebaseService } from '../../services/firebaseService';
 import { ServiceGroup, ServiceProduct } from '../../types/service';
 import { ServiceGroupModal } from './modals/ServiceGroupModal';
 import { ServiceProductModal } from './modals/ServiceProductModal';
@@ -15,7 +15,7 @@ export function ServiceGroupList() {
   const [selectedGroup, setSelectedGroup] = useState<ServiceGroup | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<ServiceProduct | null>(null);
 
-  const serviceManager = SupabaseService.getInstance();
+  const serviceManager = FirebaseService.getInstance();
 
   useEffect(() => {
     loadData();

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
+import { FirebaseService } from "../../../services/firebaseService";
 import { ServiceOrder, ServiceProduct } from '../../../types/service';
-import { SupabaseService } from "../../../services/supabaseService";
 
 interface ServiceOrderModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (order: Omit<ServiceOrder, 'id' | 'createdAt' | 'updatedAt'>) => void;
-  order: ServiceOrder | null;
+  order?: ServiceOrder;
   products: ServiceProduct[];
   clientId: string;
 }
@@ -105,7 +105,7 @@ export function ServiceOrderModal({
     };
 
     try {
-      await SupabaseService.createOrder(orderData);
+      await FirebaseService.getInstance().createOrder(orderData);
       onSave(orderData);
     } catch (error) {
       console.error(error);

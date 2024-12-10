@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Play, Pause, Ban, RefreshCw, DollarSign, AlertTriangle } from 'lucide-react';
-import { SupabaseService } from '../../services/supabaseService';
+import { FirebaseService } from '../../services/firebaseService';
 import { ClientService, ServiceOrder, ServiceProduct } from '../../types/service';
 import { ServiceOrderModal } from './modals/ServiceOrderModal';
 import { ClientFinancial } from './ClientFinancial';
@@ -27,7 +27,7 @@ export function ClientServices({ clientId, clientName }: ClientServicesProps) {
   const [selectedService, setSelectedService] = useState<ServiceOrder | null>(null);
   const [activeTab, setActiveTab] = useState<'services' | 'financial'>('services');
 
-  const serviceManager = SupabaseService.getInstance();
+  const serviceManager = FirebaseService.getInstance();
 
   useEffect(() => {
     loadData();

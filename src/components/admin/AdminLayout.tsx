@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Layout, FileText, Users, Briefcase, Settings, LogOut, Layers } from 'lucide-react';
+import { Layout, FileText, Users, Briefcase, Settings, LogOut, Layers, MessageSquare, MessageCircle, HelpCircle } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 
 export function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -8,11 +8,15 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
   const { signOut } = useAuth();
 
   const menuItems = [
+    { icon: Layout, label: 'Dashboard', path: '/admin' },
     { icon: FileText, label: 'Blog', path: '/admin/blog' },
     { icon: Users, label: 'Clientes', path: '/admin/clientes' },
     { icon: Briefcase, label: 'Empresas', path: '/admin/empresas' },
     { icon: Layers, label: 'Serviços', path: '/admin/servicos' },
-    { icon: Settings, label: 'Configurações', path: '/admin/settings' },
+    { icon: MessageSquare, label: 'Tickets', path: '/admin/tickets' },
+    { icon: MessageCircle, label: 'Chat', path: '/admin/chat' },
+    { icon: HelpCircle, label: 'FAQ', path: '/admin/faq' },
+    { icon: Settings, label: 'Configurações', path: '/admin/configuracoes' },
   ];
 
   return (

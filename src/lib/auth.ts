@@ -5,7 +5,7 @@ import {
   onAuthStateChanged
 } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
-import { auth, db } from './firebase';
+import { auth, db } from '../config/firebase';
 import { useAuthStore } from './store';
 
 export async function signUp(email: string, password: string, type: 'admin' | 'client') {

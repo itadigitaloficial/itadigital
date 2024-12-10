@@ -11,14 +11,16 @@ export function AdminRoutes() {
   }
 
   // Verifica se o usuário está autenticado e tem permissão de admin
-  if (!user || !user.isAdmin) {
+  if (!user || user.type !== 'admin') {
     return <Navigate to="/" replace />;
   }
 
   return (
     <Routes>
       <Route path="/blog" element={<BlogManagement />} />
-      {/* Adicione outras rotas admin aqui */}
+      <Route path="/clientes" element={<div>Gestão de Clientes</div>} />
+      <Route path="/empresas" element={<div>Gestão de Empresas</div>} />
+      <Route path="/servicos" element={<div>Gestão de Serviços</div>} />
       <Route path="*" element={<Navigate to="/admin/blog" replace />} />
     </Routes>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Layout, FileText, Settings, LogOut } from 'lucide-react';
+import { Layout, FileText, Users, Briefcase, Settings, LogOut, Layers } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 
 export function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -9,6 +9,9 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
 
   const menuItems = [
     { icon: FileText, label: 'Blog', path: '/admin/blog' },
+    { icon: Users, label: 'Clientes', path: '/admin/clientes' },
+    { icon: Briefcase, label: 'Empresas', path: '/admin/empresas' },
+    { icon: Layers, label: 'Serviços', path: '/admin/servicos' },
     { icon: Settings, label: 'Configurações', path: '/admin/settings' },
   ];
 
@@ -21,7 +24,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
                 <Layout className="h-8 w-8 text-indigo-600" />
-                <span className="ml-2 text-xl font-bold">Admin</span>
+                <span className="ml-2 text-xl font-bold">Painel Administrativo</span>
               </div>
             </div>
             <div className="flex items-center">
@@ -50,18 +53,16 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className={`
-                        flex items-center px-3 py-2 text-sm font-medium rounded-md
-                        ${isActive
-                          ? 'bg-indigo-50 text-indigo-600'
+                      className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md ${
+                        isActive 
+                          ? 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100' 
                           : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                        }
-                      `}
+                      }`}
                     >
-                      <Icon
+                      <Icon 
                         className={`mr-3 h-5 w-5 ${
-                          isActive ? 'text-indigo-500' : 'text-gray-400'
-                        }`}
+                          isActive ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500'
+                        }`} 
                       />
                       {item.label}
                     </Link>
@@ -70,7 +71,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
               </nav>
             </aside>
 
-            {/* Main content */}
+            {/* Conteúdo Principal */}
             <main className="col-span-12 sm:col-span-9 lg:col-span-10">
               <div className="bg-white shadow rounded-lg">
                 {children}
